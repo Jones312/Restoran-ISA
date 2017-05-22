@@ -9,7 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import static javax.persistence.GenerationType.IDENTITY;
 import static javax.persistence.CascadeType.ALL;
 import static javax.persistence.FetchType.LAZY;
@@ -37,8 +36,11 @@ public class Restaurant implements Serializable {
 	@OneToMany(cascade = {ALL}, fetch = LAZY, mappedBy = "Food")
 	private List<Beverage> drink;
 	
-	@OneToOne(cascade = {ALL}, fetch = LAZY, mappedBy = "RestaurantManager")
-	private RestaurantManager restaurantManager;
+	@OneToMany(cascade = {ALL}, fetch = LAZY, mappedBy = "RestaurantManager")
+	private List<RestaurantManager> restaurantManagers;
+	
+	@OneToMany(cascade = {ALL}, fetch = LAZY, mappedBy = "post")
+	private List<Post> posts;
 	
 	public Integer getId() {
 		return id;
@@ -80,25 +82,30 @@ public class Restaurant implements Serializable {
 		this.drink = drink;
 	}
 
-	public RestaurantManager getRestaurantManager() {
-		return restaurantManager;
+	public List<RestaurantManager> getRestaurantManagers() {
+		return restaurantManagers;
 	}
 
-	public void setRestaurantManager(RestaurantManager restaurantManager) {
-		this.restaurantManager = restaurantManager;
+	public void setRestaurantManagers(List<RestaurantManager> restaurantManagers) {
+		this.restaurantManagers = restaurantManagers;
 	}
 
 	public Restaurant() {}
 
+
+
 	public Restaurant(Integer id, String name, String type, List<Food> food, List<Beverage> drink,
-			RestaurantManager restaurantManager) {
+			List<RestaurantManager> restaurantManagers) {
+		super();
 		this.id = id;
 		this.name = name;
 		this.type = type;
 		this.food = food;
 		this.drink = drink;
-		this.restaurantManager = restaurantManager;
+		this.restaurantManagers = restaurantManagers;
 	}
+
+
 
 	private static final long serialVersionUID = 1611269029816009659L;
 }

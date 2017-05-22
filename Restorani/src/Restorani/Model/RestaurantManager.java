@@ -6,11 +6,10 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.OneToOne;
 import static javax.persistence.GenerationType.IDENTITY;
-import static javax.persistence.CascadeType.ALL;
-import static javax.persistence.FetchType.LAZY;
 
 @Entity
 @Table(name = "RestaurantManager")
@@ -34,7 +33,8 @@ public class RestaurantManager implements Serializable {
 	@Column(name="pasword", unique=false, nullable = false)
 	private String password;
 	
-	@OneToOne(cascade = {ALL}, fetch = LAZY, mappedBy = "Restaurant")
+	@ManyToOne
+	@JoinColumn(name = "restaurant", referencedColumnName = "id", nullable = false)
 	private Restaurant restaurant;
 
 	public Integer getId() {

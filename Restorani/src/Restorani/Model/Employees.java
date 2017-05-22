@@ -1,6 +1,7 @@
 package Restorani.Model;
 
 import java.sql.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
@@ -8,9 +9,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+
+import static javax.persistence.CascadeType.ALL;
 import static javax.persistence.DiscriminatorType.STRING;
+import static javax.persistence.FetchType.LAZY;
 import static javax.persistence.GenerationType.IDENTITY;
 import static javax.persistence.InheritanceType.SINGLE_TABLE;
 
@@ -42,6 +47,8 @@ public abstract class Employees{
 	@Column(name = "firstLogin",unique = false, nullable = false)
 	private boolean firstLogin;
 	
+	@OneToMany(cascade={ALL}, fetch=LAZY, mappedBy="rating")
+	private List<RatingServices> ratingServeces;
 	
 	
 	public boolean isFirstLogin() {
