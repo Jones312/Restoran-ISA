@@ -39,9 +39,17 @@ public abstract class Employees{
 	private float shoe_size;
 	@Column(name = "email",unique = true, nullable = false)
 	private String email;
+	@Column(name = "firstLogin",unique = false, nullable = false)
+	private boolean firstLogin;
 	
 	
 	
+	public boolean isFirstLogin() {
+		return firstLogin;
+	}
+	public void setFirstLogin(boolean firstLogin) {
+		this.firstLogin = firstLogin;
+	}
 	public Integer getId() {
 		return id;
 	}
