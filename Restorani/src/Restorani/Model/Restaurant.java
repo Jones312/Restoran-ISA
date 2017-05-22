@@ -15,8 +15,6 @@ import static javax.persistence.FetchType.LAZY;
 
 @Entity 
 @Table(name = "Restaurant")
-
-
 public class Restaurant implements Serializable {
 
 	@Id
@@ -30,17 +28,51 @@ public class Restaurant implements Serializable {
 	@Column(name = "type", unique = false , nullable = false)
 	private String type;
 	
-	@OneToMany(cascade = {ALL}, fetch = LAZY, mappedBy = "Food")
-	private List<Food> food;
+	@Column(name = "sizeX", unique = false , nullable = false)
+	private Integer sizeX;
+
+	@Column(name = "sizeY", unique = false , nullable = false)
+	private Integer sizeY;
 	
 	@OneToMany(cascade = {ALL}, fetch = LAZY, mappedBy = "Food")
-	private List<Beverage> drink;
+	private Set<Food> food;
+	
+	@OneToMany(cascade = {ALL}, fetch = LAZY, mappedBy = "Food")
+	private Set<Beverage> drink;
 	
 	@OneToMany(cascade = {ALL}, fetch = LAZY, mappedBy = "RestaurantManager")
-	private List<RestaurantManager> restaurantManagers;
+	private Set<RestaurantManager> restaurantManagers;
 	
 	@OneToMany(cascade = {ALL}, fetch = LAZY, mappedBy = "post")
-	private List<Post> posts;
+	private Set<Post> posts;
+	
+	public Set<Post> getPosts() {
+		return posts;
+	}
+
+	public void setPosts(Set<Post> posts) {
+		this.posts = posts;
+	}
+
+	public void setPosts(List<Post> posts) {
+		this.posts = posts;
+	}
+
+	public Integer getSizeX() {
+		return sizeX;
+	}
+
+	public void setSizeX(Integer sizeX) {
+		this.sizeX = sizeX;
+	}
+
+	public Integer getSizeY() {
+		return sizeY;
+	}
+
+	public void setSizeY(Integer sizeY) {
+		this.sizeY = sizeY;
+	}
 	
 	public Integer getId() {
 		return id;
@@ -66,27 +98,27 @@ public class Restaurant implements Serializable {
 		this.type = type;
 	}
 
-	public List<Food> getFood() {
+	public Set<Food> getFood() {
 		return food;
 	}
 
-	public void setFood(List<Food> food) {
+	public void setFood(Set<Food> food) {
 		this.food = food;
 	}
 
-	public List<Beverage> getDrink() {
+	public Set<Beverage> getDrink() {
 		return drink;
 	}
 
-	public void setDrink(List<Beverage> drink) {
+	public void setDrink(Set<Beverage> drink) {
 		this.drink = drink;
 	}
 
-	public List<RestaurantManager> getRestaurantManagers() {
+	public Set<RestaurantManager> getRestaurantManagers() {
 		return restaurantManagers;
 	}
 
-	public void setRestaurantManagers(List<RestaurantManager> restaurantManagers) {
+	public void setRestaurantManagers(Set<RestaurantManager> restaurantManagers) {
 		this.restaurantManagers = restaurantManagers;
 	}
 
@@ -94,8 +126,8 @@ public class Restaurant implements Serializable {
 
 
 
-	public Restaurant(Integer id, String name, String type, List<Food> food, List<Beverage> drink,
-			List<RestaurantManager> restaurantManagers) {
+	public Restaurant(Integer id, String name, String type, Set<Food> food, Set<Beverage> drink,
+			Set<RestaurantManager> restaurantManagers) {
 		super();
 		this.id = id;
 		this.name = name;
