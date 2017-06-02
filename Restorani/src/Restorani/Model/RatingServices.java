@@ -15,9 +15,6 @@ import javax.persistence.Table;
 
 public class RatingServices implements Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -1941148947880504801L;
 
 	@Id

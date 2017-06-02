@@ -1,5 +1,13 @@
 package Restorani.Model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import static javax.persistence.GenerationType.IDENTITY;
+
+import java.sql.Date;
 
 @Entity 
 @Table(name = "Schedules")
@@ -8,6 +16,16 @@ public class Schedule {
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "id", unique = true, nullable = false)
 	private Integer id;
+	private Employees worker;
+	private Segment segment;
+	@Column(name = "shift", unique = false , nullable = false)
+	private Integer shift;
+	@Column(name = "date", unique = false , nullable = false)
+	private Date date;
+	
+	public Schedule() {
+		super();
+	}
 	public Integer getId() {
 		return id;
 	}
@@ -38,10 +56,5 @@ public class Schedule {
 	public void setDate(Date date) {
 		this.date = date;
 	}
-	private Employees worker;
-	private Segment segment;
-	@Column(name = "shift", unique = false , nullable = false)
-	private Integer shift;
-	@Column(name = "date", unique = false , nullable = false)
-	private Date date;
+	
 }

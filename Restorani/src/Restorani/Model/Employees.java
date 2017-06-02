@@ -1,7 +1,7 @@
 package Restorani.Model;
 
 import java.sql.Date;
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
@@ -48,9 +48,21 @@ public abstract class Employees{
 	private boolean firstLogin;
 	
 	@OneToMany(cascade={ALL}, fetch=LAZY, mappedBy="rating")
-	private List<RatingServices> ratingServeces;
+	private Set<RatingServices> ratingServeces;
 	
 	
+	public Date getDate_of_birth() {
+		return date_of_birth;
+	}
+	public void setDate_of_birth(Date date_of_birth) {
+		this.date_of_birth = date_of_birth;
+	}
+	public Set<RatingServices> getRatingServeces() {
+		return ratingServeces;
+	}
+	public void setRatingServeces(Set<RatingServices> ratingServeces) {
+		this.ratingServeces = ratingServeces;
+	}
 	public boolean isFirstLogin() {
 		return firstLogin;
 	}

@@ -5,7 +5,7 @@ import static javax.persistence.FetchType.LAZY;
 import static javax.persistence.GenerationType.IDENTITY;
 
 import java.sql.Date;
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -26,7 +26,7 @@ public class Post {
 	private Integer id;
 	
 	@OneToMany(cascade = {ALL}, fetch = LAZY, mappedBy = "offer")
-	private List<Offer> offers;
+	private Set<Offer> offers;
 	
 	@Column(name = "expiration_date", unique = false, nullable = false)
 	private Date expiration_date;
@@ -37,7 +37,7 @@ public class Post {
 
 	public Post() {}
 	
-	public Post(Integer id, List<Offer> offers, Date expiration_date, Restaurant restaurant) {
+	public Post(Integer id, Set<Offer> offers, Date expiration_date, Restaurant restaurant) {
 		super();
 		this.id = id;
 		this.offers = offers;
@@ -53,11 +53,11 @@ public class Post {
 		this.id = id;
 	}
 
-	public List<Offer> getOffers() {
+	public Set<Offer> getOffers() {
 		return offers;
 	}
 
-	public void setOffers(List<Offer> offers) {
+	public void setOffers(Set<Offer> offers) {
 		this.offers = offers;
 	}
 

@@ -3,7 +3,7 @@ package Restorani.Model;
 import static javax.persistence.GenerationType.IDENTITY;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -28,8 +28,43 @@ public class Order implements Serializable{
 	private boolean paid;
 	
 	@Column(name = "food",unique = false, nullable = true)
-	private List<Food> food;
+	private Set<Food> food;
 	
 	@Column(name = "menu",unique = false, nullable = true)
-	private List<Beverage> menu;
+	private Set<Beverage> menu;
+	
+
+	public Order() {
+		super();
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public boolean isPaid() {
+		return paid;
+	}
+
+	public void setPaid(boolean paid) {
+		this.paid = paid;
+	}
+
+	public Set<Food> getFood() {
+		return food;
+	}
+
+	public void setFood(Set<Food> food) {
+		this.food = food;
+	}
+
+	public Set<Beverage> getMenu() {
+		return menu;
+	}
+
+	public void setMenu(Set<Beverage> menu) {
+		this.menu = menu;
+	}
+	
+	
 }

@@ -2,7 +2,7 @@ package Restorani.Model;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,10 +21,10 @@ public class Offer {
 	private Integer id;
 	
 	@Column(name = "food", unique = false, nullable = true)
-	private List<Food> food;
+	private Set<Food> food;
 	
 	@Column(name = "beverages", unique = false, nullable = true)
-	private List<Beverage> beverage;
+	private Set<Beverage> beverage;
 	
 	@Column(name = "accepted", unique = false, nullable = false)
 	private boolean accepted;
@@ -39,7 +39,7 @@ public class Offer {
 
 	public Offer() {}
 	
-	public Offer(Integer id, List<Food> food, List<Beverage> beverage, boolean accepted, Supplier supplier, Post post) {
+	public Offer(Integer id, Set<Food> food, Set<Beverage> beverage, boolean accepted, Supplier supplier, Post post) {
 		super();
 		this.id = id;
 		this.food = food;
@@ -57,19 +57,19 @@ public class Offer {
 		this.id = id;
 	}
 
-	public List<Food> getFood() {
+	public Set<Food> getFood() {
 		return food;
 	}
 
-	public void setFood(List<Food> food) {
+	public void setFood(Set<Food> food) {
 		this.food = food;
 	}
 
-	public List<Beverage> getBeverage() {
+	public Set<Beverage> getBeverage() {
 		return beverage;
 	}
 
-	public void setBeverage(List<Beverage> beverage) {
+	public void setBeverage(Set<Beverage> beverage) {
 		this.beverage = beverage;
 	}
 

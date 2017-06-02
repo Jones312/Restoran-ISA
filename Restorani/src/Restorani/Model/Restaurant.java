@@ -1,7 +1,7 @@
 package Restorani.Model;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -51,10 +51,6 @@ public class Restaurant implements Serializable {
 	}
 
 	public void setPosts(Set<Post> posts) {
-		this.posts = posts;
-	}
-
-	public void setPosts(List<Post> posts) {
 		this.posts = posts;
 	}
 
@@ -123,8 +119,6 @@ public class Restaurant implements Serializable {
 	}
 
 	public Restaurant() {}
-
-
 
 	public Restaurant(Integer id, String name, String type, Set<Food> food, Set<Beverage> drink,
 			Set<RestaurantManager> restaurantManagers) {

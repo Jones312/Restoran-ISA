@@ -1,7 +1,7 @@
 package Restorani.Model;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -36,15 +36,19 @@ public class Supplier implements Serializable {
 	@Column(name="pasword", unique=false, nullable=false)
 	private String password;
 	
-	@OneToMany(cascade = {ALL}, fetch = LAZY, mappedBy = "Restaurant")
-	private List<Offer> offers;
+	@OneToMany(cascade = {ALL}, fetch = LAZY, mappedBy = "post")
+	private Set<Offer> offers;
 	
-	public Integer getId() {
-		return id;
+	public Set<Offer> getOffers() {
+		return offers;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setOffers(Set<Offer> offers) {
+		this.offers = offers;
+	}
+
+	public Integer getId() {
+		return id;
 	}
 
 	public String getName() {

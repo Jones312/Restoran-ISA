@@ -1,5 +1,14 @@
 package Restorani.Model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import static javax.persistence.GenerationType.IDENTITY;
+
+import java.util.Set;
+
 
 @Entity 
 @Table(name = "Guests")
