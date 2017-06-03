@@ -6,6 +6,6 @@ import javax.persistence.Entity;
 
 @Entity
 @DiscriminatorValue("Bartender")
-public class Bartender extends Employees{
+public class Bartender extends Employee{
 	
 }

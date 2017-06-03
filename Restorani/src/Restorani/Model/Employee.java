@@ -25,7 +25,7 @@ import static javax.persistence.InheritanceType.SINGLE_TABLE;
 @Table(name = "Employees")
 @Inheritance(strategy=SINGLE_TABLE)
 @DiscriminatorColumn(name="type", discriminatorType=STRING)
-public abstract class Employees{
+public abstract class Employee{
 	
 	@Id                             
 	@GeneratedValue(strategy=IDENTITY)  
@@ -44,13 +44,20 @@ public abstract class Employees{
 	private float shoe_size;
 	@Column(name = "email",unique = true, nullable = false)
 	private String email;
+	@Column(name = "password",unique = false, nullable = false)
+	private String password;
 	@Column(name = "firstLogin",unique = false, nullable = false)
 	private boolean firstLogin;
 	
 	@OneToMany(cascade={ALL}, fetch=LAZY, mappedBy="rating")
 	private Set<RatingServices> ratingServeces;
 	
-	
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
 	public Date getDate_of_birth() {
 		return date_of_birth;
 	}

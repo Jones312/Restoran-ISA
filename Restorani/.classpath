@@ -9,5 +9,8 @@
 	<classpathentry kind="lib" path="C:/Users/User/Desktop/ISA Files/javaee.jar"/>
 	<classpathentry kind="lib" path="C:/Users/User/Desktop/ISA Files/jstl-1.2.jar"/>
 	<classpathentry kind="lib" path="C:/Users/User/Desktop/ISA Files/servlet-api.jar"/>
+	<classpathentry kind="lib" path="C:/Users/User/Desktop/ISA Files/jackson-annotations-2.8.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/User/Desktop/ISA Files/jackson-core-2.8.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/User/Desktop/ISA Files/jackson-databind-2.8.5.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

@@ -16,7 +16,7 @@ public class Schedule {
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "id", unique = true, nullable = false)
 	private Integer id;
-	private Employees worker;
+	private Employee worker;
 	private Segment segment;
 	@Column(name = "shift", unique = false , nullable = false)
 	private Integer shift;
@@ -32,10 +32,10 @@ public class Schedule {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public Employees getWorker() {
+	public Employee getWorker() {
 		return worker;
 	}
-	public void setWorker(Employees worker) {
+	public void setWorker(Employee worker) {
 		this.worker = worker;
 	}
 	public Segment getSegment() {
