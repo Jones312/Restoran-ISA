@@ -4,9 +4,9 @@
    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
    version="2.1">
  
-  <persistence-unit name="WebShop" transaction-type="JTA">
+  <persistence-unit name="RestoraniPrIV" transaction-type="JTA">
     <provider>org.apache.openjpa.persistence.PersistenceProviderImpl</provider>
-    <jta-data-source>WebshopDS</jta-data-source>
+    <jta-data-source>RestoraniPrIVDS</jta-data-source>
     <properties>
       <property name="tomee.jpa.cdi" value="false" />
       <property name="openjpa.Log" value="DefaultLevel=WARN, Tool=INFO"/>
