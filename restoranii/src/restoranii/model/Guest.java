@@ -4,6 +4,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -15,7 +18,7 @@ import java.util.Set;
 public class Guest {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
-	@Column(name = "id", unique = true, nullable = false)
+	@Column(name = "guest_id", unique = true, nullable = false)
 	private Integer id;
 	@Column(name = "email", unique = true , nullable = false)
 	private String email;
@@ -23,6 +26,31 @@ public class Guest {
 	private String password;
 	@Column(name = "name", unique = false , nullable = false)
 	private String name;
+	@Column(name = "surname", unique = false , nullable = false)
+	private String surname;
+	@Column(name = "activated", unique = false , nullable = false)
+	private boolean activated;
+	@Column(name = "address", unique = false , nullable = false)
+	private String address;
+	@ManyToMany
+	@JoinTable(name="Friends",
+	 joinColumns= @JoinColumn(name="friendId", referencedColumnName="guest_id"),
+	 inverseJoinColumns= @JoinColumn(name="personId",referencedColumnName="guest_id")
+	)
+	private Set<Guest> friendOf;
+	@ManyToMany
+	@JoinTable(name="Friends",
+	 joinColumns= @JoinColumn(name="personId", referencedColumnName="guest_id"),
+	 inverseJoinColumns= @JoinColumn(name="friendId", referencedColumnName="guest_id")
+	)
+	private Set<Guest> friends;
+	@ManyToMany
+	@JoinTable(name="GuestReservation",
+	 joinColumns=@JoinColumn(name="personId", referencedColumnName="guest_id"),
+	 inverseJoinColumns=@JoinColumn(name="reservationId", referencedColumnName="reservation_id")
+	)
+	private Set<Reservation> reservations;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -77,14 +105,26 @@ public class Guest {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	@Column(name = "surname", unique = false , nullable = false)
-	private String surname;
-	@Column(name = "activated", unique = false , nullable = false)
-	private boolean activated;
+	public Set<Guest> getFriendOf() {
+		return friendOf;
+	}
+	public void setFriendOf(Set<Guest> friendOf) {
+		this.friendOf = friendOf;
+	}
+	public Guest(Integer id, String email, String password, String name, String surname, boolean activated,
+			String address, Set<Guest> friendOf, Set<Guest> friends, Set<Reservation> reservations) {
+		super();
+		this.id = id;
+		this.email = email;
+		this.password = password;
+		this.name = name;
+		this.surname = surname;
+		this.activated = activated;
+		this.address = address;
+		this.friendOf = friendOf;
+		this.friends = friends;
+		this.reservations = reservations;
+	}
 	
-	private Set<Guest> friends;
-	private Set<Reservation> reservations;
-	@Column(name = "address", unique = false , nullable = false)
-	private String address;
 }
 

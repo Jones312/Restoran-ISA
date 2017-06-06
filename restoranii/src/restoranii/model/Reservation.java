@@ -4,6 +4,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import static javax.persistence.GenerationType.IDENTITY;
@@ -16,8 +19,13 @@ import java.util.Set;
 public class Reservation {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
-	@Column(name = "id", unique = true, nullable = false)
+	@Column(name = "reservation_id", unique = true, nullable = false)
 	private Integer id;
+	@ManyToMany
+	@JoinTable(name="GuestReservation",
+		joinColumns=@JoinColumn(name="reservationId", referencedColumnName="reservation_id"),
+		inverseJoinColumns=@JoinColumn(name="personId", referencedColumnName="guest_id")
+	)
 	private Set<Guest> guests;
 	@Column(name = "date", unique = false , nullable = false)
 	private Date date;
