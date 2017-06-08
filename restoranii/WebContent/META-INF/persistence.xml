@@ -6,7 +6,7 @@
  
   <persistence-unit name="RestoraniPrIV" transaction-type="JTA">
     <provider>org.apache.openjpa.persistence.PersistenceProviderImpl</provider>
-    <jta-data-source>A</jta-data-source>
+    <jta-data-source>RestoraniiDS</jta-data-source>
     <properties>
       <property name="tomee.jpa.cdi" value="false" />
       <property name="openjpa.Log" value="DefaultLevel=WARN, Tool=INFO"/>
