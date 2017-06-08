@@ -34,7 +34,7 @@ public class RestaurantManager implements Serializable {
 	private String password;
 	
 	@ManyToOne
-	@JoinColumn(name = "restaurant", referencedColumnName = "id", nullable = false)
+	@JoinColumn(name = "restaurant", referencedColumnName = "restaurant_id", nullable = false)
 	private Restaurant restaurant;
 
 	public Integer getId() {

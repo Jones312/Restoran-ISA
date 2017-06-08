@@ -1,11 +1,16 @@
 package restoranii.model;
 
 import java.io.Serializable;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -16,7 +21,7 @@ public class Food implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
-	@Column(name = "id", unique = true, nullable = false)
+	@Column(name = "food_id", unique = true, nullable = false)
 	private Integer id;
 	
 	@Column(name = "name", unique = false , nullable = false)
@@ -27,6 +32,19 @@ public class Food implements Serializable {
 	
 	@Column(name = "price", unique = false , nullable = false)
 	private String price;
+	
+	@ManyToMany(mappedBy="foodList")
+	private Set<RatingFood> ratings;
+	
+	@ManyToOne
+	@JoinColumn(name="restaurantId", referencedColumnName="restaurant_id", nullable = false)
+	Restaurant restaurant;
+	
+	@ManyToMany
+	@JoinTable(name="OrderedFood",
+	 joinColumns= @JoinColumn(name="foodId",referencedColumnName="food_id"),
+	 inverseJoinColumns= @JoinColumn(name="orderId", referencedColumnName="order_id"))
+	private Set<Order> orderList;
 	
 	public Integer getId() {
 		return id;

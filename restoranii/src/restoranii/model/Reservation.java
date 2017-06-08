@@ -11,29 +11,40 @@ import javax.persistence.Table;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.Set;
 
 @Entity 
 @Table(name = "Reservations")
-public class Reservation {
+public class Reservation implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4549473077123823548L;
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "reservation_id", unique = true, nullable = false)
 	private Integer id;
-	@ManyToMany
-	@JoinTable(name="GuestReservation",
-		joinColumns=@JoinColumn(name="reservationId", referencedColumnName="reservation_id"),
-		inverseJoinColumns=@JoinColumn(name="personId", referencedColumnName="guest_id")
-	)
+	
+	@ManyToMany(mappedBy="reservations")
 	private Set<Guest> guests;
+	
 	@Column(name = "date", unique = false , nullable = false)
 	private Date date;
+	
 	@Column(name = "duration", unique = false , nullable = false)
 	private Integer duration;
+	
 	@Column(name = "complete", unique = false , nullable = false)
 	private boolean complete;
-	private Set<Table> tables;
+	
+	@ManyToMany
+	@JoinTable(name="TableReservation",
+		joinColumns=@JoinColumn(name="reservationId", referencedColumnName="reservation_id"),
+		inverseJoinColumns=@JoinColumn(name="tableId", referencedColumnName="table_id")
+	)
+	private Set<RestaurantTable> tables;
 	
 	
 	
@@ -44,6 +55,10 @@ public class Reservation {
 	public Integer getId() {
 		return id;
 	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
 	public Set<Guest> getGuests() {
 		return guests;
 	}
@@ -68,12 +83,8 @@ public class Reservation {
 	public void setComplete(boolean complete) {
 		this.complete = complete;
 	}
-	public Set<Table> getTables() {
-		return tables;
-	}
-	public void setTables(Set<Table> tables) {
-		this.tables = tables;
-	}
+
+	
 	
 	
 }

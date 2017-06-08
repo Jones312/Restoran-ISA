@@ -9,9 +9,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
 
 import static javax.persistence.CascadeType.ALL;
 import static javax.persistence.DiscriminatorType.STRING;
@@ -49,8 +52,21 @@ public abstract class Employee{
 	@Column(name = "firstLogin",unique = false, nullable = false)
 	private boolean firstLogin;
 	
-	@OneToMany(cascade={ALL}, fetch=LAZY, mappedBy="rating")
-	private Set<RatingServices> ratingServeces;
+	@ManyToMany(mappedBy="employes")
+	private Set<RatingServices> ratings;
+	
+	@ManyToOne
+	@JoinColumn(name="restaurantId", referencedColumnName="restaurant_id",nullable = false)
+	private Restaurant restaurant;
+	
+	@OneToMany(mappedBy="employe",cascade = {ALL}, fetch = LAZY)
+	private Set<Schedule> schedule;
+	
+	@ManyToMany
+	@JoinTable(name="OrderListing",
+	 joinColumns= @JoinColumn(name="employeeId",referencedColumnName="employee_id"),
+	 inverseJoinColumns= @JoinColumn(name="orderId", referencedColumnName="order_id"))
+	private Set<Order> orderList;
 	
 	public String getPassword() {
 		return password;
@@ -64,11 +80,12 @@ public abstract class Employee{
 	public void setDate_of_birth(Date date_of_birth) {
 		this.date_of_birth = date_of_birth;
 	}
-	public Set<RatingServices> getRatingServeces() {
-		return ratingServeces;
+	
+	public Set<RatingServices> getRatings() {
+		return ratings;
 	}
-	public void setRatingServeces(Set<RatingServices> ratingServeces) {
-		this.ratingServeces = ratingServeces;
+	public void setRatings(Set<RatingServices> ratings) {
+		this.ratings = ratings;
 	}
 	public boolean isFirstLogin() {
 		return firstLogin;

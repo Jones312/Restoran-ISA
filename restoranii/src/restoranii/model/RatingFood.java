@@ -15,28 +15,30 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity 
-@Table(name = "Rating")
-public class RatingServices implements Serializable{
-
-	private static final long serialVersionUID = -1941148947880504801L;
+@Table(name = "FoodRate")
+public class RatingFood  implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6870357423510172826L;
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
-	@Column(name = "rating_service_id", unique = true, nullable = false)
+	@Column(name = "rating_food_id", unique = true, nullable = false)
 	private Integer id;
 	
 	@Column(name = "rating", unique = false , nullable = false)
 	private int rating;
 	
 	@ManyToMany
-	@JoinTable(name="ServiceRating",
-	 joinColumns= @JoinColumn(name="ratingServiceId",referencedColumnName="rating_service_id"),
-	 inverseJoinColumns= @JoinColumn(name="employeeId", referencedColumnName="employee_id"))
-	private Set<Employee> employes;
+	@JoinTable(name="FoodRating",
+	 joinColumns= @JoinColumn(name="ratingFoodId",referencedColumnName="rating_food_id"),
+	 inverseJoinColumns= @JoinColumn(name="foodId", referencedColumnName="food_id"))
+	private Set<Food> foodList;
 
-	public RatingServices() {};
+	public RatingFood() {};
 	
-	public RatingServices(Integer id, int rating) {
+	public RatingFood(Integer id, int rating) {
 		super();
 		this.id = id;
 		this.rating = rating;

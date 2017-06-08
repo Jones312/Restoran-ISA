@@ -19,7 +19,7 @@ public class Restaurant implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
-	@Column(name = "id", unique = true, nullable = false)
+	@Column(name = "restaurant_id", unique = true, nullable = false)
 	private Integer id;
 	
 	@Column(name = "name", unique = false , nullable = false)
@@ -34,17 +34,29 @@ public class Restaurant implements Serializable {
 	@Column(name = "sizeY", unique = false , nullable = false)
 	private Integer sizeY;
 	
-	@OneToMany(cascade = {ALL}, fetch = LAZY, mappedBy = "Food")
+	@OneToMany(cascade = {ALL}, fetch = LAZY, mappedBy = "restaurant")
 	private Set<Food> food;
 	
-	@OneToMany(cascade = {ALL}, fetch = LAZY, mappedBy = "Food")
+	@OneToMany(cascade = {ALL}, fetch = LAZY, mappedBy = "restaurant")
 	private Set<Beverage> drink;
 	
-	@OneToMany(cascade = {ALL}, fetch = LAZY, mappedBy = "RestaurantManager")
+	@OneToMany(cascade = {ALL}, fetch = LAZY, mappedBy = "restaurant")
 	private Set<RestaurantManager> restaurantManagers;
 	
-	@OneToMany(cascade = {ALL}, fetch = LAZY, mappedBy = "post")
+	@OneToMany(cascade = {ALL}, fetch = LAZY, mappedBy = "restaurant")
 	private Set<Post> posts;
+	
+	@OneToMany(cascade = {ALL}, fetch = LAZY, mappedBy = "restaurant")
+	private Set<RestaurantTable> tables;
+	
+	@OneToMany(cascade = {ALL}, fetch = LAZY, mappedBy = "restaurant")
+	private Set<RatingRestaurant> grade;
+	
+	@OneToMany(cascade = {ALL}, fetch = LAZY, mappedBy = "restaurant")
+	private Set<Employee> employes;
+	
+	@OneToMany(cascade = {ALL}, fetch = LAZY, mappedBy = "restaurant")
+	private Set<Segment> segments;
 	
 	public Set<Post> getPosts() {
 		return posts;

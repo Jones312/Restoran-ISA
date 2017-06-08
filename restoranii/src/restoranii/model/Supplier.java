@@ -7,6 +7,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -21,7 +24,7 @@ public class Supplier implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
-	@Column(name = "id", unique = true, nullable = false)
+	@Column(name = "supplier_id", unique = true, nullable = false)
 	private Integer id;
 	
 	@Column(name = "name", unique = false , nullable = false)
@@ -36,8 +39,15 @@ public class Supplier implements Serializable {
 	@Column(name="pasword", unique=false, nullable=false)
 	private String password;
 	
-	@OneToMany(cascade = {ALL}, fetch = LAZY, mappedBy = "post")
+	@OneToMany(cascade = {ALL}, fetch = LAZY, mappedBy = "supplier")
 	private Set<Offer> offers;
+	
+	@ManyToMany
+	@JoinTable(name="SupplierPosts",
+	 joinColumns= @JoinColumn(name="supplierId", referencedColumnName="supplier_id"),
+	 inverseJoinColumns= @JoinColumn(name="postId",referencedColumnName="post_id")
+	)
+	private Set<Post> posts;
 	
 	public Set<Offer> getOffers() {
 		return offers;

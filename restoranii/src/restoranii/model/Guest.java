@@ -10,12 +10,17 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 import static javax.persistence.GenerationType.IDENTITY;
 
+import java.io.Serializable;
 import java.util.Set;
 
 
 @Entity 
 @Table(name = "Guests")
-public class Guest {
+public class Guest implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1170576326191940629L;
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "guest_id", unique = true, nullable = false)
@@ -32,24 +37,24 @@ public class Guest {
 	private boolean activated;
 	@Column(name = "address", unique = false , nullable = false)
 	private String address;
+	
 	@ManyToMany
 	@JoinTable(name="Friends",
 	 joinColumns= @JoinColumn(name="friendId", referencedColumnName="guest_id"),
 	 inverseJoinColumns= @JoinColumn(name="personId",referencedColumnName="guest_id")
 	)
 	private Set<Guest> friendOf;
-	@ManyToMany
-	@JoinTable(name="Friends",
-	 joinColumns= @JoinColumn(name="personId", referencedColumnName="guest_id"),
-	 inverseJoinColumns= @JoinColumn(name="friendId", referencedColumnName="guest_id")
-	)
+	
+	@ManyToMany(mappedBy="friendOf")
 	private Set<Guest> friends;
+	
 	@ManyToMany
 	@JoinTable(name="GuestReservation",
 	 joinColumns=@JoinColumn(name="personId", referencedColumnName="guest_id"),
 	 inverseJoinColumns=@JoinColumn(name="reservationId", referencedColumnName="reservation_id")
 	)
 	private Set<Reservation> reservations;
+	
 	
 	public Integer getId() {
 		return id;
@@ -111,6 +116,9 @@ public class Guest {
 	public void setFriendOf(Set<Guest> friendOf) {
 		this.friendOf = friendOf;
 	}
+	public Guest() {
+		super();
+	}
 	public Guest(Integer id, String email, String password, String name, String surname, boolean activated,
 			String address, Set<Guest> friendOf, Set<Guest> friends, Set<Reservation> reservations) {
 		super();
@@ -125,6 +133,7 @@ public class Guest {
 		this.friends = friends;
 		this.reservations = reservations;
 	}
+	
 	
 }
 

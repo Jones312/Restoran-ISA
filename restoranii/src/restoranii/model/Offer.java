@@ -17,7 +17,7 @@ import javax.persistence.Table;
 public class Offer {
 	@Id
 	@GeneratedValue(strategy=IDENTITY)
-	@Column(name = "id", unique = true, nullable = false)
+	@Column(name = "offer_id", unique = true, nullable = false)
 	private Integer id;
 	
 	@Column(name = "food", unique = false, nullable = true)
@@ -30,11 +30,11 @@ public class Offer {
 	private boolean accepted;
 	
 	@ManyToOne
-	@JoinColumn(name = "supplier", referencedColumnName = "id", nullable = false)
+	@JoinColumn(name = "supplier", referencedColumnName = "supplier_id", nullable = false)
 	private Supplier supplier;
 	
 	@ManyToOne
-	@JoinColumn(name = "post", referencedColumnName = "id", nullable = false)
+	@JoinColumn(name = "post", referencedColumnName = "post_id", nullable = false)
 	private Post post;
 
 	public Offer() {}

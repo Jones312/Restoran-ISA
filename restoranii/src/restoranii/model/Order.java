@@ -9,6 +9,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -28,11 +31,18 @@ public class Order implements Serializable{
 	@Column(name = "paid",unique = false, nullable = false)
 	private boolean paid;
 	
-	@Column(name = "food",unique = false, nullable = true)
+	@ManyToMany(mappedBy="orderList")
 	private Set<Food> food;
 	
-	@Column(name = "menu",unique = false, nullable = true)
+	@ManyToMany(mappedBy="orderList")
 	private Set<Beverage> menu;
+	
+	@ManyToOne
+	@JoinColumn(name="tableID",referencedColumnName="table_id",nullable=false)
+	private RestaurantTable table;
+	
+	@ManyToMany(mappedBy="orderList")
+	private Set<Employee> employees;
 	
 
 	public Order() {

@@ -12,6 +12,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -22,19 +24,22 @@ public class Post {
 
 	@Id
 	@GeneratedValue(strategy=IDENTITY)
-	@Column(name = "id", unique = true, nullable = false)
+	@Column(name = "post_id", unique = true, nullable = false)
 	private Integer id;
 	
-	@OneToMany(cascade = {ALL}, fetch = LAZY, mappedBy = "offer")
+	@OneToMany(cascade = {ALL}, fetch = LAZY, mappedBy = "post")
 	private Set<Offer> offers;
 	
 	@Column(name = "expiration_date", unique = false, nullable = false)
 	private Date expiration_date;
 	
 	@ManyToOne
-	@JoinColumn(name = "restaurant", referencedColumnName = "id", nullable = false)
+	@JoinColumn(name = "restaurant", referencedColumnName = "restaurant_id", nullable = false)
 	private Restaurant restaurant;
-
+	
+	@ManyToMany(mappedBy="posts")
+	private Set<Supplier> suppliers;
+	
 	public Post() {}
 	
 	public Post(Integer id, Set<Offer> offers, Date expiration_date, Restaurant restaurant) {
