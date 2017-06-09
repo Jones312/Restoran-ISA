@@ -16,34 +16,32 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "Order")
-public class Order implements Serializable{
+public class Order implements Serializable {
 	/**
-	 * WTF is this :P
-	 * Broj za serilizaciju
+	 * WTF is this :P Broj za serilizaciju
 	 */
 	private static final long serialVersionUID = -1286622804311512971L;
 
-	@Id                             
-	@GeneratedValue(strategy=IDENTITY)  
-	@Column(name="order_id", unique=true, nullable=false) 
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
+	@Column(name = "order_id", unique = true, nullable = false)
 	private Integer id;
-	
-	@Column(name = "paid",unique = false, nullable = false)
+
+	@Column(name = "paid", unique = false, nullable = false)
 	private boolean paid;
-	
-	@ManyToMany(mappedBy="orderList")
+
+	@ManyToMany(mappedBy = "orderList")
 	private Set<Food> food;
-	
-	@ManyToMany(mappedBy="orderList")
+
+	@ManyToMany(mappedBy = "orderList")
 	private Set<Beverage> menu;
-	
+
 	@ManyToOne
-	@JoinColumn(name="tableID",referencedColumnName="table_id",nullable=false)
+	@JoinColumn(name = "tableID", referencedColumnName = "table_id", nullable = false)
 	private RestaurantTable table;
-	
-	@ManyToMany(mappedBy="orderList")
+
+	@ManyToMany(mappedBy = "orderList")
 	private Set<Employee> employees;
-	
 
 	public Order() {
 		super();
@@ -76,6 +74,36 @@ public class Order implements Serializable{
 	public void setMenu(Set<Beverage> menu) {
 		this.menu = menu;
 	}
-	
-	
+
+	public RestaurantTable getTable() {
+		return table;
+	}
+
+	public void setTable(RestaurantTable table) {
+		this.table = table;
+	}
+
+	public Set<Employee> getEmployees() {
+		return employees;
+	}
+
+	public void setEmployees(Set<Employee> employees) {
+		this.employees = employees;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public Order(Integer id, boolean paid, Set<Food> food, Set<Beverage> menu, RestaurantTable table,
+			Set<Employee> employees) {
+		super();
+		this.id = id;
+		this.paid = paid;
+		this.food = food;
+		this.menu = menu;
+		this.table = table;
+		this.employees = employees;
+	}
+
 }

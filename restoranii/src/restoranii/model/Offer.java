@@ -2,6 +2,7 @@ package restoranii.model;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
+import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -14,40 +15,33 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "Offer")
-public class Offer {
+public class Offer implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6102368537180555547L;
+
 	@Id
-	@GeneratedValue(strategy=IDENTITY)
+	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "offer_id", unique = true, nullable = false)
 	private Integer id;
-	
+
 	@Column(name = "food", unique = false, nullable = true)
 	private Set<Food> food;
-	
+
 	@Column(name = "beverages", unique = false, nullable = true)
 	private Set<Beverage> beverage;
-	
+
 	@Column(name = "accepted", unique = false, nullable = false)
 	private boolean accepted;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "supplier", referencedColumnName = "supplier_id", nullable = false)
 	private Supplier supplier;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "post", referencedColumnName = "post_id", nullable = false)
 	private Post post;
-
-	public Offer() {}
-	
-	public Offer(Integer id, Set<Food> food, Set<Beverage> beverage, boolean accepted, Supplier supplier, Post post) {
-		super();
-		this.id = id;
-		this.food = food;
-		this.beverage = beverage;
-		this.accepted = accepted;
-		this.supplier = supplier;
-		this.post = post;
-	}
 
 	public Integer getId() {
 		return id;
@@ -96,4 +90,19 @@ public class Offer {
 	public void setPost(Post post) {
 		this.post = post;
 	}
+
+	public Offer(Integer id, Set<Food> food, Set<Beverage> beverage, boolean accepted, Supplier supplier, Post post) {
+		super();
+		this.id = id;
+		this.food = food;
+		this.beverage = beverage;
+		this.accepted = accepted;
+		this.supplier = supplier;
+		this.post = post;
+	}
+
+	public Offer() {
+		super();
+	}
+
 }

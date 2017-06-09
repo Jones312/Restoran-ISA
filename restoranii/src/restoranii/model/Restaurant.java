@@ -13,7 +13,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 import static javax.persistence.CascadeType.ALL;
 import static javax.persistence.FetchType.LAZY;
 
-@Entity 
+@Entity
 @Table(name = "Restaurant")
 public class Restaurant implements Serializable {
 
@@ -21,43 +21,43 @@ public class Restaurant implements Serializable {
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "restaurant_id", unique = true, nullable = false)
 	private Integer id;
-	
-	@Column(name = "name", unique = false , nullable = false)
+
+	@Column(name = "name", unique = false, nullable = false)
 	private String name;
-	
-	@Column(name = "type", unique = false , nullable = false)
+
+	@Column(name = "type", unique = false, nullable = false)
 	private String type;
-	
-	@Column(name = "sizeX", unique = false , nullable = false)
+
+	@Column(name = "sizeX", unique = false, nullable = false)
 	private Integer sizeX;
 
-	@Column(name = "sizeY", unique = false , nullable = false)
+	@Column(name = "sizeY", unique = false, nullable = false)
 	private Integer sizeY;
-	
-	@OneToMany(cascade = {ALL}, fetch = LAZY, mappedBy = "restaurant")
+
+	@OneToMany(cascade = { ALL }, fetch = LAZY, mappedBy = "restaurant")
 	private Set<Food> food;
-	
-	@OneToMany(cascade = {ALL}, fetch = LAZY, mappedBy = "restaurant")
+
+	@OneToMany(cascade = { ALL }, fetch = LAZY, mappedBy = "restaurant")
 	private Set<Beverage> drink;
-	
-	@OneToMany(cascade = {ALL}, fetch = LAZY, mappedBy = "restaurant")
+
+	@OneToMany(cascade = { ALL }, fetch = LAZY, mappedBy = "restaurant")
 	private Set<RestaurantManager> restaurantManagers;
-	
-	@OneToMany(cascade = {ALL}, fetch = LAZY, mappedBy = "restaurant")
+
+	@OneToMany(cascade = { ALL }, fetch = LAZY, mappedBy = "restaurant")
 	private Set<Post> posts;
-	
-	@OneToMany(cascade = {ALL}, fetch = LAZY, mappedBy = "restaurant")
+
+	@OneToMany(cascade = { ALL }, fetch = LAZY, mappedBy = "restaurant")
 	private Set<RestaurantTable> tables;
-	
-	@OneToMany(cascade = {ALL}, fetch = LAZY, mappedBy = "restaurant")
+
+	@OneToMany(cascade = { ALL }, fetch = LAZY, mappedBy = "restaurant")
 	private Set<RatingRestaurant> grade;
-	
-	@OneToMany(cascade = {ALL}, fetch = LAZY, mappedBy = "restaurant")
+
+	@OneToMany(cascade = { ALL }, fetch = LAZY, mappedBy = "restaurant")
 	private Set<Employee> employes;
-	
-	@OneToMany(cascade = {ALL}, fetch = LAZY, mappedBy = "restaurant")
+
+	@OneToMany(cascade = { ALL }, fetch = LAZY, mappedBy = "restaurant")
 	private Set<Segment> segments;
-	
+
 	public Set<Post> getPosts() {
 		return posts;
 	}
@@ -81,7 +81,7 @@ public class Restaurant implements Serializable {
 	public void setSizeY(Integer sizeY) {
 		this.sizeY = sizeY;
 	}
-	
+
 	public Integer getId() {
 		return id;
 	}
@@ -130,20 +130,60 @@ public class Restaurant implements Serializable {
 		this.restaurantManagers = restaurantManagers;
 	}
 
-	public Restaurant() {}
+	public Set<RestaurantTable> getTables() {
+		return tables;
+	}
 
-	public Restaurant(Integer id, String name, String type, Set<Food> food, Set<Beverage> drink,
-			Set<RestaurantManager> restaurantManagers) {
+	public void setTables(Set<RestaurantTable> tables) {
+		this.tables = tables;
+	}
+
+	public Set<RatingRestaurant> getGrade() {
+		return grade;
+	}
+
+	public void setGrade(Set<RatingRestaurant> grade) {
+		this.grade = grade;
+	}
+
+	public Set<Employee> getEmployes() {
+		return employes;
+	}
+
+	public void setEmployes(Set<Employee> employes) {
+		this.employes = employes;
+	}
+
+	public Set<Segment> getSegments() {
+		return segments;
+	}
+
+	public void setSegments(Set<Segment> segments) {
+		this.segments = segments;
+	}
+
+	public Restaurant() {
+		super();
+	}
+
+	public Restaurant(Integer id, String name, String type, Integer sizeX, Integer sizeY, Set<Food> food,
+			Set<Beverage> drink, Set<RestaurantManager> restaurantManagers, Set<Post> posts,
+			Set<RestaurantTable> tables, Set<RatingRestaurant> grade, Set<Employee> employes, Set<Segment> segments) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.type = type;
+		this.sizeX = sizeX;
+		this.sizeY = sizeY;
 		this.food = food;
 		this.drink = drink;
 		this.restaurantManagers = restaurantManagers;
+		this.posts = posts;
+		this.tables = tables;
+		this.grade = grade;
+		this.employes = employes;
+		this.segments = segments;
 	}
-
-
 
 	private static final long serialVersionUID = 1611269029816009659L;
 }

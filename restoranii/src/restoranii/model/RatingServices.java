@@ -14,9 +14,9 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-@Entity 
+@Entity
 @Table(name = "Rating")
-public class RatingServices implements Serializable{
+public class RatingServices implements Serializable {
 
 	private static final long serialVersionUID = -1941148947880504801L;
 
@@ -24,18 +24,14 @@ public class RatingServices implements Serializable{
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "rating_service_id", unique = true, nullable = false)
 	private Integer id;
-	
-	@Column(name = "rating", unique = false , nullable = false)
+
+	@Column(name = "rating", unique = false, nullable = false)
 	private int rating;
-	
+
 	@ManyToMany
-	@JoinTable(name="ServiceRating",
-	 joinColumns= @JoinColumn(name="ratingServiceId",referencedColumnName="rating_service_id"),
-	 inverseJoinColumns= @JoinColumn(name="employeeId", referencedColumnName="employee_id"))
+	@JoinTable(name = "ServiceRating", joinColumns = @JoinColumn(name = "ratingServiceId", referencedColumnName = "rating_service_id"), inverseJoinColumns = @JoinColumn(name = "employeeId", referencedColumnName = "employee_id"))
 	private Set<Employee> employes;
 
-	public RatingServices() {};
-	
 	public RatingServices(Integer id, int rating) {
 		super();
 		this.id = id;
@@ -52,5 +48,29 @@ public class RatingServices implements Serializable{
 
 	public void setRating(int rating) {
 		this.rating = rating;
-	}	
+	}
+
+	public Set<Employee> getEmployes() {
+		return employes;
+	}
+
+	public void setEmployes(Set<Employee> employes) {
+		this.employes = employes;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public RatingServices(Integer id, int rating, Set<Employee> employes) {
+		super();
+		this.id = id;
+		this.rating = rating;
+		this.employes = employes;
+	}
+
+	public RatingServices() {
+		super();
+	}
+
 }

@@ -17,9 +17,9 @@ import static javax.persistence.GenerationType.IDENTITY;
 import java.io.Serializable;
 import java.util.Set;
 
-@Entity 
+@Entity
 @Table(name = "Tables")
-public class RestaurantTable implements Serializable{
+public class RestaurantTable implements Serializable {
 	/**
 	 * 
 	 */
@@ -28,67 +28,109 @@ public class RestaurantTable implements Serializable{
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "table_id", unique = true, nullable = false)
 	private Integer id;
-	
+
 	@ManyToOne
-	@JoinColumn(name="segmentId", referencedColumnName="segment_id", nullable=false)
+	@JoinColumn(name = "segmentId", referencedColumnName = "segment_id", nullable = false)
 	private Segment segment;
-	
+
 	@ManyToOne
-	@JoinColumn(name="restaurantId", referencedColumnName="restaurant_id", nullable=false)
+	@JoinColumn(name = "restaurantId", referencedColumnName = "restaurant_id", nullable = false)
 	private Restaurant restaurant;
-	
-	@Column(name = "chairs", unique = false , nullable = false)
+
+	@Column(name = "chairs", unique = false, nullable = false)
 	private Integer chairs;
-	
-	@Column(name = "posX", unique = false , nullable = false)
+
+	@Column(name = "posX", unique = false, nullable = false)
 	private Integer posX;
-	
-	@Column(name = "posY", unique = false , nullable = false)
+
+	@Column(name = "posY", unique = false, nullable = false)
 	private Integer posY;
-	
-	@ManyToMany(mappedBy="tables")
+
+	@ManyToMany(mappedBy = "tables")
 	private Set<Reservation> reservations;
-	
-	@OneToMany(mappedBy="table",cascade = {ALL}, fetch = LAZY)
+
+	@OneToMany(mappedBy = "table", cascade = { ALL }, fetch = LAZY)
 	private Set<Order> orders;
-	
-	
-	
-	public RestaurantTable() {
-		super();
-	}
+
 	public Integer getId() {
 		return id;
 	}
+
 	public Segment getSegment() {
 		return segment;
 	}
+
 	public void setSegment(Segment segment) {
 		this.segment = segment;
 	}
+
 	public Restaurant getRestaurant() {
 		return restaurant;
 	}
+
 	public void setRestaurant(Restaurant restaurant) {
 		this.restaurant = restaurant;
 	}
+
 	public Integer getChairs() {
 		return chairs;
 	}
+
 	public void setChairs(Integer chairs) {
 		this.chairs = chairs;
 	}
+
 	public Integer getPosX() {
 		return posX;
 	}
+
 	public void setPosX(Integer posX) {
 		this.posX = posX;
 	}
+
 	public Integer getPosY() {
 		return posY;
 	}
+
 	public void setPosY(Integer posY) {
 		this.posY = posY;
 	}
-}
 
+	public Set<Reservation> getReservations() {
+		return reservations;
+	}
+
+	public void setReservations(Set<Reservation> reservations) {
+		this.reservations = reservations;
+	}
+
+	public Set<Order> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(Set<Order> orders) {
+		this.orders = orders;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public RestaurantTable() {
+		super();
+	}
+
+	public RestaurantTable(Integer id, Segment segment, Restaurant restaurant, Integer chairs, Integer posX,
+			Integer posY, Set<Reservation> reservations, Set<Order> orders) {
+		super();
+		this.id = id;
+		this.segment = segment;
+		this.restaurant = restaurant;
+		this.chairs = chairs;
+		this.posX = posX;
+		this.posY = posY;
+		this.reservations = reservations;
+		this.orders = orders;
+	}
+
+}

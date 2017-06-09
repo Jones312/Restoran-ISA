@@ -19,19 +19,19 @@ public class SystemManager implements Serializable {
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "id", unique = true, nullable = false)
 	private Integer id;
-	
-	@Column(name = "name", unique = false , nullable = false)
+
+	@Column(name = "name", unique = false, nullable = false)
 	private String name;
-	
-	@Column(name = "lastname", unique = false , nullable = false)
+
+	@Column(name = "lastname", unique = false, nullable = false)
 	private String lastname;
-	
+
 	@Column(name = "email", unique = true, nullable = false)
 	private String email;
-	
-	@Column(name="pasword", unique=false, nullable=false)
+
+	@Column(name = "pasword", unique = false, nullable = false)
 	private String password;
-	
+
 	public Integer getId() {
 		return id;
 	}
@@ -79,6 +79,10 @@ public class SystemManager implements Serializable {
 		this.lastname = lastname;
 		this.email = email;
 		this.password = password;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	private static final long serialVersionUID = 3868154832180855481L;

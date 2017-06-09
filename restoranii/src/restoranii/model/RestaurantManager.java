@@ -11,28 +11,32 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import static javax.persistence.GenerationType.IDENTITY;
 
+/**
+ * @author Djordje
+ *
+ */
 @Entity
 @Table(name = "RestaurantManager")
 
 public class RestaurantManager implements Serializable {
 
 	@Id
-	@GeneratedValue(strategy=IDENTITY)
+	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "id", unique = true, nullable = false)
 	private Integer id;
-	
-	@Column(name = "name", unique = false , nullable = false)
+
+	@Column(name = "name", unique = false, nullable = false)
 	private String name;
-	
-	@Column(name = "lastname", unique = false , nullable = false)
+
+	@Column(name = "lastname", unique = false, nullable = false)
 	private String lastname;
-	
+
 	@Column(name = "email", unique = true, nullable = false)
 	private String email;
-	
-	@Column(name="pasword", unique=false, nullable = false)
+
+	@Column(name = "pasword", unique = false, nullable = false)
 	private String password;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "restaurant", referencedColumnName = "restaurant_id", nullable = false)
 	private Restaurant restaurant;
@@ -81,7 +85,13 @@ public class RestaurantManager implements Serializable {
 		this.restaurant = restaurant;
 	}
 
-	public RestaurantManager(){}
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public RestaurantManager() {
+		super();
+	}
 
 	public RestaurantManager(Integer id, String name, String lastname, String email, String password,
 			Restaurant restaurant) {
@@ -93,6 +103,6 @@ public class RestaurantManager implements Serializable {
 		this.password = password;
 		this.restaurant = restaurant;
 	}
-	
+
 	private static final long serialVersionUID = -2306126240267945807L;
 }

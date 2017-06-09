@@ -1,4 +1,5 @@
 package restoranii.model;
+
 import java.io.Serializable;
 import java.util.Set;
 
@@ -13,36 +14,33 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import static javax.persistence.GenerationType.IDENTITY;
 
-@Entity 
+@Entity
 @Table(name = "Beverage")
 
-public class Beverage implements Serializable{
+public class Beverage implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "beaverage_id", unique = true, nullable = false)
 	private Integer id;
-	
-	@Column(name = "name", unique = false , nullable = false)
+
+	@Column(name = "name", unique = false, nullable = false)
 	private String name;
-	
-	@Column(name = "description", unique = false , nullable = false)
+
+	@Column(name = "description", unique = false, nullable = false)
 	private String description;
-	
-	@Column(name = "price", unique = false , nullable = false)
+
+	@Column(name = "price", unique = false, nullable = false)
 	private String price;
-	
+
 	@ManyToOne
-	@JoinColumn(name="restaurantId",referencedColumnName="restaurant_id",nullable=false)
+	@JoinColumn(name = "restaurantId", referencedColumnName = "restaurant_id", nullable = false)
 	private Restaurant restaurant;
-	
+
 	@ManyToMany
-	@JoinTable(name="OrderedDrinks",
-	 joinColumns= @JoinColumn(name="beaverageId",referencedColumnName="beaverage_id"),
-	 inverseJoinColumns= @JoinColumn(name="orderId", referencedColumnName="order_id"))
+	@JoinTable(name = "OrderedDrinks", joinColumns = @JoinColumn(name = "beaverageId", referencedColumnName = "beaverage_id"), inverseJoinColumns = @JoinColumn(name = "orderId", referencedColumnName = "order_id"))
 	private Set<Order> orderList;
-	
-	
+
 	public Integer getId() {
 		return id;
 	}
@@ -75,13 +73,42 @@ public class Beverage implements Serializable{
 		this.price = price;
 	}
 
-	public Beverage() {}
-
 	public Beverage(Integer id, String name, String description, String price) {
 		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.price = price;
+	}
+
+	public Restaurant getRestaurant() {
+		return restaurant;
+	}
+
+	public void setRestaurant(Restaurant restaurant) {
+		this.restaurant = restaurant;
+	}
+
+	public Set<Order> getOrderList() {
+		return orderList;
+	}
+
+	public void setOrderList(Set<Order> orderList) {
+		this.orderList = orderList;
+	}
+
+	public Beverage() {
+		super();
+	}
+
+	public Beverage(Integer id, String name, String description, String price, Restaurant restaurant,
+			Set<Order> orderList) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.description = description;
+		this.price = price;
+		this.restaurant = restaurant;
+		this.orderList = orderList;
 	}
 
 	private static final long serialVersionUID = -8445442230482376969L;
